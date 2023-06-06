@@ -1,0 +1,112 @@
+image: node:16
+
+definitions:
+  steps:
+    - step: &npm-test
+        name: Test
+        script:
+          - git submodule update --init --recursive
+          - npm ci
+          - npm run test
+    - step: &npm-lint
+        name: Lint
+        script:
+          - git submodule update --init --recursive
+          - npm ci
+          - npm run lint
+    - step: &npm-validate-ts
+        name: Validate Typescript
+        script:
+          - git submodule update --init --recursive
+          - npm ci
+          - npm run validate-typescript
+    - step: &npm-build
+        name: Build artifacts
+        artifacts:
+          - build/**
+        script:
+          - git submodule update --init --recursive
+          - npm ci
+          - npm run build
+    - step: &npm-build-unsafe-without-sourcemaps
+        name: Build artifacts
+        artifacts:
+          - build/**
+        script:
+          - git submodule update --init --recursive
+          - npm ci
+          - npm run build-unsafe
+    - step: &azure-staticwebapp-infra-deploy
+        name: Deploy web app infrastructure
+        image: mcr.microsoft.com/azure-cli:2.27.1
+        deployment: environment-infra
+        script:
+          - mkdir infrastructure && cd infrastructure && git clone git@bitbucket.org:effectiveretailteam/atobi-infra.git
+          - cd atobi-infra/resources/$ENVIRONMENT_NAME/Frontend
+          - az login --service-principal -u $AZURE_SPN_CLIENT_ID -p $AZURE_SPN_SECRET --tenant $AZURE_TENANT_ID
+          - az deployment group create --subscription $AZURE_SUBSCRIPTION --resource-group $AZURE_RESOURCE_GROUP --template-file atobi-app.bicep --parameters @atobi-app.parameters.json
+    - step: &azure-staticwebapp-upload
+        name: Deploy web app
+        image: mcr.microsoft.com/appsvc/staticappsclient:prev
+        deployment: environment-app
+        script:
+          - /bin/staticsites/StaticSitesClient upload --verbose --app ./build --skipAppBuild true --apiToken $AZURE_STATICSITE_TOKEN
+
+pipelines:
+  default:
+    - parallel:
+        - step: *npm-test
+        - step: *npm-lint
+        - step: *npm-validate-ts
+  branches:
+    test:
+      - parallel:
+          - step: *npm-test
+          - step: *npm-lint
+          - step: *npm-validate-ts
+      - parallel:
+          - step:
+              size: "2x"
+              <<: *npm-build
+              deployment: test-app-build
+          - step:
+              <<: *azure-staticwebapp-infra-deploy
+              deployment: test-infra
+      - step:
+          <<: *azure-staticwebapp-upload
+          deployment: test-app-upload
+    staging:
+      - parallel:
+          - step: *npm-test
+          - step: *npm-lint
+          - step: *npm-validate-ts
+      - parallel:
+          - step:
+              size: "2x"
+              <<: *npm-build
+              deployment: staging-app-build
+          - step:
+              <<: *azure-staticwebapp-infra-deploy
+              deployment: staging-infra
+      - step:
+          <<: *azure-staticwebapp-upload
+          deployment: staging-app-upload
+    main:
+      - parallel:
+          - step: *npm-test
+          - step: *npm-lint
+          - step: *npm-validate-ts
+      - parallel:
+          - step:
+              size: "2x"
+              <<: *npm-build
+              deployment: production-app-build
+          - step:
+              <<: *azure-staticwebapp-infra-deploy
+              deployment: production-infra
+      - step:
+          <<: *azure-staticwebapp-upload
+          deployment: production-app-upload
+  pull-requests:
+    "**":
+      - step: *npm-build-unsafe-without-sourcemaps

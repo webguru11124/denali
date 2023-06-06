@@ -1,0 +1,15 @@
+export { default as getNewsArticleComments } from './getNewsArticleComments';
+export { default as getExpiredNews } from './getExpiredNews';
+export { default as commentNewsArticle } from './commentNewsArticle';
+export { default as getNewsArticle } from './getNewsArticle';
+export { default as getNews } from './getNews';
+export { default as likeArticle } from './likeArticle';
+export { default as getCategories } from './getCategories';
+export { default as getUnsenAmount } from './getUnseenAmount';
+export { default as editArticleComment } from './editArticleComment';
+export { default as deleteArticleComment } from './deleteArticleComment';
+export { default as likeComment } from './likeComment';
+export { default as getArticleSeenTeams } from './getArticleSeenTeams';
+export { default as getSeenLocation } from './getSeenLocation';
+export { default as getArticleSeenUsers } from './getArticleSeenUsers';
+export { default as postVote } from './postVote';

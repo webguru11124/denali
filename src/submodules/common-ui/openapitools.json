@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "6.2.0",
+    "generators": {
+      "staging": {
+        "generatorName": "typescript-axios",
+        "inputSpec": "https://gcs.erapp.dk/api/swagger/specification.yaml",
+        "output": "generated/api/gcs",
+        "generateAliasAsModel": true
+      }
+    }
+  }
+}
