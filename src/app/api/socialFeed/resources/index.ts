@@ -1,0 +1,10 @@
+export { default as getSocialFeed } from './getSocialFeed';
+export { default as postSocialPost } from './postSocialPost';
+export { default as likePost } from './likePost';
+export { default as commentPost } from './commentPost';
+export { default as likePostComment } from './likePostComment';
+export { default as deletePostComment } from './deletePostComment';
+export { default as updateComment } from './updateComment';
+export { default as deletePost } from './deletePost';
+export { default as updatePost } from './updatePost';
+export { default as getSocialPost } from './getSocialPost';

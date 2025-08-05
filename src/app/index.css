@@ -1,0 +1,206 @@
+@import url('https://use.typekit.net/hle5hmw.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Noto';
+  src: url('assets/fonts/notosans-bold-webfont.woff2') format('woff2'),
+    url('assets/fonts/notosans-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto';
+  src: url('assets/fonts/notosans-regular-webfont.woff2') format('woff2'),
+    url('assets/fonts/notosans-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  @apply font-lato;
+}
+
+/* Always display scrollbar to prevent page flickering */
+@screen lg {
+  body {
+    overflow-y: scroll;
+  }
+}
+
+iframe {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+:root {
+  --color-primary: #4c3b39;
+  --color-primaryHover: rgba(255, 255, 255, 0.2);
+  --color-secondary: #e8a39c;
+}
+
+/* Overriding react-tooltip border-radius. 
+Comes from the docs https://wwayne.github.io/react-tooltip/ */
+.react-tooltip {
+  border-radius: 9px !important;
+}
+
+.scroll-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.pintura-editor.PinturaModal {
+  background-color: rgba(34, 34, 34, 0.6);
+}
+.pintura-editor.PinturaModal
+  > .PinturaRoot.PinturaRootComponent:not([data-env~='narrow']) {
+  width: 90%;
+  height: 90%;
+  border-radius: 16px;
+}
+.PinturaRoot > .PinturaNav .PinturaButton.PinturaButtonExport {
+  padding: 4px 4px 4px 8px;
+  gap: 8px;
+  background: #2e3192;
+  border-radius: 8px;
+  color: #fff;
+}
+.PinturaRoot
+  > .PinturaNav
+  .PinturaButton.PinturaButtonExport
+  .PinturaRoot
+  > .PinturaNav {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* react-datepicker */
+.react-datepicker {
+  border: none !important;
+  box-shadow: 0px 10px 12px rgba(112, 112, 112, 0.1) !important;
+  font-family: 'Lato' !important;
+}
+
+.react-datepicker-wrapper {
+  width: initial !important;
+}
+
+.react-datepicker__header {
+  background-color: #fff !important;
+  margin-top: 8px;
+  border: none !important;
+  padding: 0px !important;
+}
+
+.react-datepicker__input-container {
+  display: block !important;
+}
+.react-datepicker-time__input {
+  margin-left: 0px !important;
+}
+
+.react-datepicker__day {
+  width: 44px !important;
+  color: #858585 !important;
+}
+
+.react-datepicker__day--in-selecting-range {
+  background-color: #eaeaf4 !important;
+  color: #2e3192 !important;
+}
+
+.react-datepicker__day--selecting-range-end {
+  background-color: #eaeaf4 !important;
+  color: #2e3192 !important;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.react-datepicker__day--selected {
+  color: #fff !important;
+  background-color: #2e3192 !important;
+}
+
+.react-datepicker__day--keyboard-selected.react-datepicker__day--today {
+  background-color: #eaeaf4 !important;
+  font-weight: normal !important;
+  color: #2e3192 !important;
+}
+
+.react-datepicker__day--selected.react-datepicker__day--today {
+  color: #fff !important;
+  font-weight: normal !important;
+}
+
+.react-datepicker__day-names {
+  margin-top: 18px;
+  background-color: #fff;
+}
+
+.react-datepicker__day-name {
+  width: 44px !important;
+}
+
+.react-datepicker__day--in-range:not(.react-datepicker__day--range-start) {
+  background-color: #eaeaf4;
+  color: #2e3192 !important;
+}
+
+.react-datepicker__day--in-range:not(
+    .react-datepicker__day--range-start
+  ):hover {
+  background-color: #eaeaf4;
+  color: #2e3192 !important;
+}
+
+.react-datepicker__day--range-end:not(.react-datepicker__day--outside-month) {
+  background-color: #2e3192;
+  color: #fff !important;
+}
+
+.react-datepicker__day--range-end:not(
+    .react-datepicker__day--outside-month
+  ):hover {
+  background-color: #2e3192;
+  color: #fff !important;
+}
+
+.react-datepicker__day--range-start.react-datepicker__day--in-range {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.react-datepicker__day--range-start.react-datepicker__day--in-range:hover {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.react-datepicker__day--range-end.react-datepicker__day--in-range {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.react-datepicker__day--range-end.react-datepicker__day--in-range:hover {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.react-datepicker-time__caption {
+  font-family: 'Lato';
+  font-size: 14px;
+  color: #717171;
+}
+
+.react-datepicker__children-container {
+  width: initial !important;
+}
+/* react-datepicker */

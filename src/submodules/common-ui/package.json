@@ -1,0 +1,45 @@
+{
+  "name": "common-ui",
+  "version": "0.10.0",
+  "description": "Project for shared ui logic and types",
+  "scripts": {
+    "ts": "tsc --noEmit",
+    "test": "jest",
+    "generate": "openapi-generator-cli generate --generator-key staging"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/effectiveretailteam/common-ui.git"
+  },
+  "keywords": [
+    "common",
+    "ui",
+    "react",
+    "types",
+    "typescript"
+  ],
+  "author": "Atobi",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/effectiveretailteam/common-ui#readme",
+  "peerDependencies": {
+    "react": "^17 || ^18"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "axios": "^1.2.2",
+    "camelcase-keys": "^8.0.1",
+    "lodash": "^4.17.21"
+  },
+  "engines": {
+    "npm": "^8",
+    "node": "^16"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.3",
+    "@types/lodash": "^4.14.184",
+    "jest": "^29.0.3",
+    "ts-jest": "^29.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}

@@ -1,0 +1,25 @@
+image: node:16
+
+definitions:
+  steps:
+    - step: &npm-validate-ts
+        name: Validate typescript
+        script:
+          - npm ci
+          - npm run ts
+    - step: &npm-test
+        name: Test
+        script:
+          - npm ci
+          - npm run test
+
+pipelines:
+  default:
+    - parallel:
+        - step: *npm-validate-ts
+        - step: *npm-test
+  branches:
+    master:
+      - parallel:
+          - step: *npm-validate-ts
+          - step: *npm-test
